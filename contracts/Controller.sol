@@ -21,6 +21,28 @@ contract Controller is Owned {
         Forwarded(destination, value, data);
     }
 
+    struct Identity {
+        address creator;
+        string username;
+        string email;
+    }
+
+    // Identity[] identities;
+
+    mapping (address => Identity) public identities;
+
+    function createIdentity(address addr, string name,  string _email) returns(bool){
+        // http://ethereum.stackexchange.com/questions/4467/initialising-structs-to-storage-variables
+        Identity memory identity = Identity({creator: addr, username: name, email: _email });
+        // identities.push(identity);
+        identities[addr] = identity;
+    }
+
+    function getUsername(address addr) returns(string){
+        var person = identities[addr];
+        return person.username;
+    }
+
     // It'll need access to the users private key and it would store the public key
         // Whats the data structure
 
