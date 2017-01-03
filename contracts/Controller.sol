@@ -43,6 +43,12 @@ contract Controller is Owned {
         return person.username;
     }
 
+    function getEmail(address addr) returns(string){
+        var person = identities[addr];
+        return person.email;
+    }
+
+
     // It'll need access to the users private key and it would store the public key
         // Whats the data structure
 

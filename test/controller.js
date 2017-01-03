@@ -11,14 +11,18 @@ contract('Controller', function(accounts) {
   it("creates an identity", function() {
     var controller = Controller.deployed();
     var testName = 'test_name'
+    var testEmail = 'test@email.com'
 
-    return controller.createIdentity(accounts[1], testName, 'test@email.com').then((data) => {
+    return controller.createIdentity(accounts[1], testName, testEmail).then((data) => {
       // If it gets to this point, then that means the createIdentity function was run 
       // successfully and a transaction id is returned
 
       return controller.getUsername.call(accounts[1])
     }).then((username) => {
-      assert.equal(username, testName, "The set the username to test_name");
+      assert.equal(username, testName, "The function getUsername returns " + testName);
+      return controller.getEmail.call(accounts[1])
+    }).then((email) => {
+      assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
     })
 
   });
