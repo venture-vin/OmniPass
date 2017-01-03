@@ -1,6 +1,7 @@
 pragma solidity ^0.4.2;
 
 import "Proxy.sol";
+import "Owned.sol";
 
 contract Controller is Owned {
     event Forwarded (address indexed destination,uint value,bytes data);
