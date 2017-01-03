@@ -22,6 +22,18 @@ contract Proxy is Owned {
         if (!destination.call.value(value)(data)) {throw;}
         Forwarded(destination, value, data);
     }
+    struct PersonData {
+        address owner;
+        uint id_number;
+        string full_name;
+        uint birthday;
+        bool insured; //if true, already insured
+        bool passport_expired; //if true, already expired
+        bool residency; //if true, already a resident
+        bool military; //if true, already a member of military
+    }
+
+    mapping(address => PersonData) public personDatas;
 
     // Hash of attributes: needs to be hashed with symmetric keys - selectively public
     // - ID
