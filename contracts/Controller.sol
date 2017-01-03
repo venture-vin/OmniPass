@@ -23,6 +23,7 @@ contract Controller is Owned {
         Identity memory identity = Identity({creator: addr, username: name, email: _email });
         identities[addr] = identity;
         proxy = new Proxy(addr, name, _email);
+        // proxy.createIdentity(addr, name, _email);
         return true;
     }
 

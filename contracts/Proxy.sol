@@ -37,9 +37,20 @@ contract Proxy is Owned {
         identities[addr] = identity;
     }
 
+    function createIdentity(address addr, string name,  string _email) returns(bool){
+        Identity memory identity = Identity({creator: addr, username: name, email: _email });
+        identities[addr] = identity;
+        return true;
+    }
+
     function getUsername(address addr) returns(string){
         var person = identities[addr];
         return person.username;
+    }
+
+    function getEmail(address addr) returns(string){
+        var person = identities[addr];
+        return person.email;
     }
 
     // Hash of attributes: needs to be hashed with symmetric keys - selectively public
