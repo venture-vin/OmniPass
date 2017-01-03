@@ -23,6 +23,25 @@ contract Proxy is Owned {
         Forwarded(destination, value, data);
     }
 
+    struct Identity {
+        address creator;
+        string username;
+        string email;
+    }
+
+    mapping (address => Identity) public identities;
+
+    function Proxy(address addr, string name,  string _email){
+        owner = msg.sender;
+        Identity memory identity = Identity({creator: addr, username: name, email: _email });
+        identities[addr] = identity;
+    }
+
+    function getUsername(address addr) returns(string){
+        var person = identities[addr];
+        return person.username;
+    }
+
     // Hash of attributes: needs to be hashed with symmetric keys - selectively public
     // - ID
     // - Name
