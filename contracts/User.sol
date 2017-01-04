@@ -9,16 +9,34 @@ contract User is Owned {
         Forwarded(destination, value, data);
     }
 
+    // Hash of attributes: needs to be hashed with symmetric keys - selectively public
+    // - Visa type
+    // - Insured/Uninsured
+    // - Birthday
+    // - Passport expiration status
+
     struct Identity {
         address creator;
         string username;
+        string legalName;
         string email;
+        string ID;
+        bool residency;
+        bool military;
     }
 
     mapping (address => Identity) public identities;
 
-    function createIdentity(address addr, string name,  string _email) returns(bool){
-        Identity memory identity = Identity({creator: addr, username: name, email: _email });
+    function createIdentity(address addr, string _username,  string _email, string _legalName, string _ID) returns(bool){
+        Identity memory identity = Identity({
+            creator: addr,
+            username: _username,
+            legalName: _legalName,
+            email: _email,
+            ID: _ID,
+            residency: false,
+            military: false
+        });
         identities[addr] = identity;
         return true;
     }
