@@ -18,10 +18,13 @@ contract Proxy is Owned {
 
     mapping (address => Identity) public identities;
 
-    function Proxy(address addr, string name,  string _email){
-        owner = msg.sender;
-        Identity memory identity = Identity({creator: addr, username: name, email: _email });
-        identities[addr] = identity;
+    // function Proxy(address addr, string name,  string _email){
+    //     owner = msg.sender;
+    //     Identity memory identity = Identity({creator: addr, username: name, email: _email });
+    //     identities[addr] = identity;
+    // }
+
+    function Proxy(){
     }
 
     function createIdentity(address addr, string name,  string _email) returns(bool){

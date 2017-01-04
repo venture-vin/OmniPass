@@ -19,10 +19,8 @@ contract('Controller', function(accounts) {
 
       return controller.getUsername.call(accounts[1])
     }).then((username) => {
+      console.log(username)
       assert.equal(username, testName, "The function getUsername returns " + testName);
-      return controller.getEmail.call(accounts[1])
-    }).then((email) => {
-      assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
     })
 
   });

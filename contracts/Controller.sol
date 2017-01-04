@@ -20,12 +20,20 @@ contract Controller is Owned {
 
     mapping (address => Identity) public identities;
 
-    function createIdentity(address addr, string name,  string _email) returns(bool){
-        Identity memory identity = Identity({creator: addr, username: name, email: _email });
-        identities[addr] = identity;
-        proxy = new Proxy(addr, name, _email);
-        // proxy.createIdentity(addr, name, _email);
-        return true;
+    // function createIdentity(address addr, string name,  string _email) returns(bool){
+    //     Identity memory identity = Identity({creator: addr, username: name, email: _email });
+    //     identities[addr] = identity;
+    //     proxy = new Proxy(addr, name, _email);
+    //     // proxy.createIdentity(addr, name, _email);
+    //     return true;
+    // }
+    function createIdentity(address addr, string name,  string _email) returns(address proxyAddress){
+        // Identity memory identity = Identity({creator: addr, username: name, email: _email });
+        // identities[addr] = identity;
+        proxy = new Proxy();
+        Proxy(proxy).createIdentity(addr, name, _email);
+        // return address(new Proxy(addr, name, _email))
+        return proxy;
     }
 
     function getUsername(address addr) returns(string){
