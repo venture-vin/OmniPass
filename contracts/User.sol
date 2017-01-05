@@ -18,8 +18,8 @@ contract User is Owned {
     struct Identity {
         address creator;
         string username;
-        string legalName;
         string email;
+        string legalName;
         string ID;
         bool residency;
         bool military;
@@ -49,5 +49,10 @@ contract User is Owned {
     function getEmail(address addr) returns(string){
         var person = identities[addr];
         return person.email;
+    }
+
+    function getIdentity(address addr) returns(string, string, string, string){
+        var person = identities[addr];
+        return (person.username, person.email, person.legalName, person.ID);
     }
 }
