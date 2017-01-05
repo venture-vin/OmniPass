@@ -9,18 +9,20 @@ contract('User', function(accounts) {
   });
 
   it("creates an identity", function() {
-    var proxy = Proxy.deployed();
+    var user = User.deployed();
     var testName = 'test_name'
     var testEmail = 'test@email.com'
+    var testFullName = 'Legal Name'
+    var testId = 'testid1234'
 
-    return proxy.createIdentity(accounts[1], testName, testEmail).then((data) => {
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId).then((data) => {
 
-      return proxy.getUsername.call(accounts[1])
+      return user.getUsername.call(accounts[1])
 
     }).then((username) => {
 
       assert.equal(username, testName, "The function getUsername returns " + testName);
-      return proxy.getEmail.call(accounts[1])
+      return user.getEmail.call(accounts[1])
 
     }).then((email) => {
       assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
@@ -31,37 +33,42 @@ contract('User', function(accounts) {
   });
 
   it("creates multiple identities that can be accessed by account address", function() {
-    var proxy = Proxy.deployed();
+    var user = User.deployed();
     var testName = 'test_name'
     var testEmail = 'test@email.com'
+    var testFullName = 'Legal Name'
+    var testId = 'testid1234'
+
     var userName = 'user_name'
     var userEmail = 'user@email.com'
+    var userFullName = 'Legal Name'
+    var userId = 'testid1234'
 
-    return proxy.createIdentity(accounts[1], testName, testEmail)
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId)
       .then((data) => {
 
-        return proxy.createIdentity(accounts[2], userName, userEmail).then((data) => {
+        return user.createIdentity(accounts[2], userName, userEmail, userFullName, userId).then((data) => {
 
         })
           .then(() => {
-            return proxy.getUsername.call(accounts[1])
+            return user.getUsername.call(accounts[1])
           })
           .then((username) => {
 
             assert.equal(username, testName, "The function getUsername returns " + testName);
-            return proxy.getEmail.call(accounts[1])
+            return user.getEmail.call(accounts[1])
 
           })
           .then((email) => {
             assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
 
-            return proxy.getUsername.call(accounts[2])
+            return user.getUsername.call(accounts[2])
 
           })
           .then((username) => {
 
             assert.equal(username, userName, "The function getUsername returns " + testName);
-            return proxy.getEmail.call(accounts[2])
+            return user.getEmail.call(accounts[2])
 
           })
           .then((email) => {
