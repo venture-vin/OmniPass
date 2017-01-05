@@ -1,18 +1,7 @@
 pragma solidity ^0.4.2;
 
-contract Owned {
-    address public owner;
-    modifier onlyOwner(){ if (isOwner(msg.sender)) _; }
-    modifier ifOwner(address sender) { if(isOwner(sender)) _; }
-    function Owned(){
-        owner = msg.sender;
-    }
-    function isOwner(address addr) public returns(bool) { return addr == owner;
-    }
-    function transfer(address _owner) onlyOwner {
-        owner = _owner;
-    }
-}
+import "Proxy.sol";
+import "Owned.sol";
 
 contract Controller is Owned {
     event Forwarded (address indexed destination,uint value,bytes data);
@@ -20,6 +9,50 @@ contract Controller is Owned {
         if (!destination.call.value(value)(data)) {throw;}
         Forwarded(destination, value, data);
     }
+
+    struct Identity {
+        address creator;
+        string username;
+        string email;
+    }
+
+    address proxy;
+
+    mapping (address => Identity) public identities;
+
+    // function createIdentity(address addr, string name,  string _email) returns(bool){
+    //     Identity memory identity = Identity({creator: addr, username: name, email: _email });
+    //     identities[addr] = identity;
+    //     proxy = new Proxy(addr, name, _email);
+    //     // proxy.createIdentity(addr, name, _email);
+    //     return true;
+    // }
+    function createIdentity(address addr, string name,  string _email) returns(address proxyAddress){
+        // Identity memory identity = Identity({creator: addr, username: name, email: _email });
+        // identities[addr] = identity;
+        proxy = new Proxy();
+        Proxy(proxy).createIdentity(addr, name, _email);
+        // return address(new Proxy(addr, name, _email))
+        return proxy;
+    }
+
+    function getUsername(address addr) returns(string){
+        var person = identities[addr];
+        return person.username;
+        // TODO: Call the proxy contract for the username and email; storing it there
+        // instead of the controller
+        // return Proxy(proxy).getUsername(addr);
+    }
+
+    function getEmail(address addr) returns(string){
+        var person = identities[addr];
+        return person.email;
+    }
+
+    function getProxyAddress(address addr) returns(address){
+        return proxy;
+    }
+
 
     // It'll need access to the users private key and it would store the public key
         // Whats the data structure
