@@ -14,21 +14,23 @@ contract('User', function(accounts) {
     var testEmail = 'test@email.com'
     var testFullName = 'Legal Name'
     var testId = 'testid1234'
+    var testDate = new Date('1995.01.01').getTime() / 1000
 
-    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId).then((data) => {
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId, testDate)
+      .then((data) => {
 
-      return user.getUsername.call(accounts[1])
+        return user.getUsername.call(accounts[1])
 
-    }).then((username) => {
+      }).then((username) => {
 
-      assert.equal(username, testName, "The function getUsername returns " + testName);
-      return user.getEmail.call(accounts[1])
+        assert.equal(username, testName, "The function getUsername returns " + testName);
+        return user.getEmail.call(accounts[1])
 
-    }).then((email) => {
-      assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
+      }).then((email) => {
+        assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
 
-      return true
-    })
+        return true
+      })
 
   });
 
@@ -38,43 +40,43 @@ contract('User', function(accounts) {
     var testEmail = 'test@email.com'
     var testFullName = 'Legal Name'
     var testId = 'testid1234'
+    var testDate = new Date('1995.01.01').getTime() / 1000
 
     var userName = 'user_name'
     var userEmail = 'user@email.com'
     var userFullName = 'Legal Name'
     var userId = 'testid1234'
+    var userDate = new Date('1996.01.01').getTime() / 1000
 
-    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId)
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId, testDate)
       .then((data) => {
 
-        return user.createIdentity(accounts[2], userName, userEmail, userFullName, userId).then((data) => {
+        return user.createIdentity(accounts[2], userName, userEmail, userFullName, userId, userDate)
 
-        })
-          .then(() => {
-            return user.getUsername.call(accounts[1])
-          })
-          .then((username) => {
+      })
+      .then(() => {
+        return user.getUsername.call(accounts[1])
+      })
+      .then((username) => {
 
-            assert.equal(username, testName, "The function getUsername returns " + testName);
-            return user.getEmail.call(accounts[1])
+        assert.equal(username, testName, "The function getUsername returns " + testName);
+        return user.getEmail.call(accounts[1])
 
-          })
-          .then((email) => {
-            assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
+      })
+      .then((email) => {
+        assert.equal(email, testEmail, "The function getEmail returns " + testEmail);
 
-            return user.getUsername.call(accounts[2])
+        return user.getUsername.call(accounts[2])
 
-          })
-          .then((username) => {
+      })
+      .then((username) => {
 
-            assert.equal(username, userName, "The function getUsername returns " + testName);
-            return user.getEmail.call(accounts[2])
+        assert.equal(username, userName, "The function getUsername returns " + testName);
+        return user.getEmail.call(accounts[2])
 
-          })
-          .then((email) => {
-            assert.equal(email, userEmail, "The function getEmail returns " + testEmail);
-          });
-
+      })
+      .then((email) => {
+        assert.equal(email, userEmail, "The function getEmail returns " + testEmail);
       });
 
   });
@@ -85,20 +87,23 @@ contract('User', function(accounts) {
     var testEmail = 'test@email.com'
     var testFullName = 'Legal Name'
     var testId = 'testid1234'
+    var testDate = new Date('1995.01.01').getTime() / 1000
 
-    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId).then((data) => {
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId, testDate)
+      .then((data) => {
 
-      return user.getIdentity.call(accounts[1])
+        return user.getIdentity.call(accounts[1])
 
-    }).then((identity) => {
+      })
+      .then((identity) => {
 
-      assert.equal(identity[0], testName, "The function getIdentity returns " + testName);
-      assert.equal(identity[1], testEmail, "The function getIdentity returns " + testEmail);
-      assert.equal(identity[2], testFullName, "The function getIdentity returns " + testFullName);
-      assert.equal(identity[3], testId, "The function getIdentity returns " + testId);
+        assert.equal(identity[0], testName, "The function getIdentity returns " + testName);
+        assert.equal(identity[1], testEmail, "The function getIdentity returns " + testEmail);
+        assert.equal(identity[2], testFullName, "The function getIdentity returns " + testFullName);
+        assert.equal(identity[3], testId, "The function getIdentity returns " + testId);
 
-      return true
-    })
+        return true
+      })
 
   });
 
@@ -108,17 +113,19 @@ contract('User', function(accounts) {
     var testEmail = 'test@email.com'
     var testFullName = 'Legal Name'
     var testId = 'testid1234'
+    var testDate = new Date('1995.01.01').getTime() / 1000
 
-    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId).then((data) => {
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId, testDate)
+      .then((data) => {
 
-      return user.getResidency.call(accounts[1])
+        return user.getResidency.call(accounts[1])
 
-    }).then((residency) => {
+      }).then((residency) => {
 
-      assert.equal(residency, false, "The function getResidency returns false.");
+        assert.equal(residency, false, "The function getResidency returns false.");
 
-      return true
-    })
+        return true
+      })
 
   });
 
@@ -128,17 +135,19 @@ contract('User', function(accounts) {
     var testEmail = 'test@email.com'
     var testFullName = 'Legal Name'
     var testId = 'testid1234'
+    var testDate = new Date('1995.01.01').getTime() / 1000
 
-    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId).then((data) => {
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId, testDate)
+      .then((data) => {
 
-      return user.getMilitaryStatus.call(accounts[1])
+        return user.getMilitaryStatus.call(accounts[1])
 
-    }).then((residency) => {
+      }).then((residency) => {
 
-      assert.equal(residency, false, "The function getMilitaryStatus returns false.");
+        assert.equal(residency, false, "The function getMilitaryStatus returns false.");
 
-      return true
-    })
+        return true
+      })
 
   });
 
@@ -148,32 +157,36 @@ contract('User', function(accounts) {
     var testEmail = 'test@email.com'
     var testFullName = 'Legal Name'
     var testId = 'testid1234'
+    var testDate = new Date('1995.01.01').getTime() / 1000
 
     var userName = 'user_name'
     var userEmail = 'user@email.com'
     var userFullName = 'Legal Name'
     var userId = 'testid1234'
+    var userDate = new Date('1996.01.01').getTime() / 1000
 
-    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId)
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId, testDate)
       .then(() => {
 
           return user.getIdentity.call(accounts[1])
 
-      }).then((identity) => {
+      })
+      .then((identity) => {
 
         assert.equal(identity[0], testName, "The function getIdentity returns " + testName);
         assert.equal(identity[1], testEmail, "The function getIdentity returns " + testEmail);
         assert.equal(identity[2], testFullName, "The function getIdentity returns " + testFullName);
         assert.equal(identity[3], testId, "The function getIdentity returns " + testId);
 
-        return user.updateIdentity(accounts[1], userName, userEmail, userFullName, userId).then((data) => {
+        return user.createIdentity(accounts[2], userName, userEmail, userFullName, userId, userDate)
 
       })
       .then(() => {
 
-          return user.getIdentity.call(accounts[1])
+          return user.getIdentity.call(accounts[2])
 
-      }).then((identity) => {
+      })
+      .then((identity) => {
 
         assert.equal(identity[0], userName, "The function getIdentity returns " + userName);
         assert.equal(identity[1], userEmail, "The function getIdentity returns " + userEmail);
@@ -182,7 +195,6 @@ contract('User', function(accounts) {
 
         return true
 
-      })
       })
 
   });
@@ -193,20 +205,20 @@ contract('User', function(accounts) {
     var testEmail = 'test@email.com'
     var testFullName = 'Legal Name'
     var testId = 'testid1234'
+    var testDate = new Date('1995.01.01').getTime() / 1000
 
-    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId).then((data) => {
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId, testDate)
+      .then((data) => {
 
-      return user.getInsurance.call(accounts[1])
+        return user.getInsurance.call(accounts[1])
 
-    }).then((residency) => {
+      }).then((residency) => {
 
-      assert.equal(residency, false, "The function getMilitaryStatus returns false.");
+        assert.equal(residency, false, "The function getMilitaryStatus returns false.");
 
-      return true
-    })
+        return true
+      })
 
   });
-
-
 
 });
