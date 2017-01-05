@@ -55,4 +55,9 @@ contract User is Owned {
         var person = identities[addr];
         return (person.username, person.email, person.legalName, person.ID);
     }
+
+    function getResidency(address addr) returns(bool){
+        var person = identities[addr];
+        return person.residency;
+    }
 }
