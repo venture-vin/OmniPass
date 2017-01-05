@@ -101,6 +101,7 @@ contract('User', function(accounts) {
         assert.equal(identity[1], testEmail, "The function getIdentity returns " + testEmail);
         assert.equal(identity[2], testFullName, "The function getIdentity returns " + testFullName);
         assert.equal(identity[3], testId, "The function getIdentity returns " + testId);
+        assert.equal(identity[4], testDate, "The function getIdentity returns " + testDate);
 
         return true
       })
@@ -177,6 +178,7 @@ contract('User', function(accounts) {
         assert.equal(identity[1], testEmail, "The function getIdentity returns " + testEmail);
         assert.equal(identity[2], testFullName, "The function getIdentity returns " + testFullName);
         assert.equal(identity[3], testId, "The function getIdentity returns " + testId);
+        assert.equal(identity[4], testDate, "The function getIdentity returns " + testDate);
 
         return user.createIdentity(accounts[2], userName, userEmail, userFullName, userId, userDate)
 
@@ -192,6 +194,7 @@ contract('User', function(accounts) {
         assert.equal(identity[1], userEmail, "The function getIdentity returns " + userEmail);
         assert.equal(identity[2], userFullName, "The function getIdentity returns " + userFullName);
         assert.equal(identity[3], userId, "The function getIdentity returns " + userId);
+        assert.equal(identity[4], userDate, "The function getIdentity returns " + userDate);
 
         return true
 
