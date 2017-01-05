@@ -60,4 +60,9 @@ contract User is Owned {
         var person = identities[addr];
         return person.residency;
     }
+
+    function getMilitaryStatus(address addr) returns(bool){
+        var person = identities[addr];
+        return person.military;
+    }
 }

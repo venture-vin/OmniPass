@@ -122,5 +122,25 @@ contract('User', function(accounts) {
 
   });
 
+  it("getMilitaryStatus returns a boolean false by default", function() {
+    var user = User.deployed();
+    var testName = 'test_name'
+    var testEmail = 'test@email.com'
+    var testFullName = 'Legal Name'
+    var testId = 'testid1234'
+
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId).then((data) => {
+
+      return user.getMilitaryStatus.call(accounts[1])
+
+    }).then((residency) => {
+
+      assert.equal(residency, false, "The function getMilitaryStatus returns false.");
+
+      return true
+    })
+
+  });
+
 
 });
