@@ -1,6 +1,69 @@
+
+.navbar.navbar-static-top.navbar-dark.bg-inverse {
+  margin-bottom: 10%;
+  background-color: #302e32;
+  padding: 1.75rem;
+}
+
+.container-fluid {
+  text-align: center!important;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.navbar-brand {
+  font-size: 2em;
+}
+
+.navbar-header {
+  padding: 25px;
+}
+
+.navbar-toggler {
+  margin-top: 1%;
+  margin-bottom: 15px;
+}
+
+.about {
+  padding: 20px 0px 20px 0px;
+}
+
+.contact {
+  padding: 20px 0px 20px 0px;
+}
+
 .card.card-outline-secondary.text-xs-center {
-  margin-left: 15%;
-  margin-right: 15%;
-  margin-top: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 10%;
   font-family: "Open Sans", sans-serif;
+  border-color: #ec872c;
+  border-radius: 30px;
+  color: #ec872c;
+}
+
+.card-blockquote {
+  font-size: 3em;
+}
+
+.glyphicon {
+  font-size: 1.6em;
+  color: #ec872c;
+  margin-right: 50px;
+  margin-left: -125px;
+  -webkit-column-width: 100px; /* Chrome, Safari, Opera */
+  -moz-column-width: 100px; /* Firefox */
+  column-width: 100px;
+}
+
+.card-block{
+  padding: 0px;
+}
+
+.options {
+
+}
+
+.space {
+
 }
