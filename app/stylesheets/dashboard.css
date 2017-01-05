@@ -51,9 +51,6 @@
   color: #ec872c;
   margin-right: 50px;
   margin-left: -125px;
-  -webkit-column-width: 100px; /* Chrome, Safari, Opera */
-  -moz-column-width: 100px; /* Firefox */
-  column-width: 100px;
 }
 
 .card-block{
