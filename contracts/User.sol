@@ -66,6 +66,15 @@ contract User is Owned {
         return person.military;
     }
 
+    function updateIdentity(address addr, string _username,  string _email, string _legalName, string _ID) returns(bool){
+        var person = identities[addr];
+        person.username = _username;
+        person.email = _email;
+        person.legalName = _legalName;
+        person.ID = _ID;
+        return true;
+    }
+
     // It'll need access to the users private key and it would store the public key
         // Whats the data structure
 

@@ -142,5 +142,50 @@ contract('User', function(accounts) {
 
   });
 
+  it("updateIdentity returns a boolean false by default", function() {
+    var user = User.deployed();
+    var testName = 'test_name'
+    var testEmail = 'test@email.com'
+    var testFullName = 'Legal Name'
+    var testId = 'testid1234'
+
+    var userName = 'user_name'
+    var userEmail = 'user@email.com'
+    var userFullName = 'Legal Name'
+    var userId = 'testid1234'
+
+    return user.createIdentity(accounts[1], testName, testEmail, testFullName, testId)
+      .then(() => {
+
+          return user.getIdentity.call(accounts[1])
+
+      }).then((identity) => {
+
+        assert.equal(identity[0], testName, "The function getIdentity returns " + testName);
+        assert.equal(identity[1], testEmail, "The function getIdentity returns " + testEmail);
+        assert.equal(identity[2], testFullName, "The function getIdentity returns " + testFullName);
+        assert.equal(identity[3], testId, "The function getIdentity returns " + testId);
+
+        return user.updateIdentity(accounts[1], userName, userEmail, userFullName, userId).then((data) => {
+
+      })
+      .then(() => {
+
+          return user.getIdentity.call(accounts[1])
+
+      }).then((identity) => {
+
+        assert.equal(identity[0], userName, "The function getIdentity returns " + userName);
+        assert.equal(identity[1], userEmail, "The function getIdentity returns " + userEmail);
+        assert.equal(identity[2], userFullName, "The function getIdentity returns " + userFullName);
+        assert.equal(identity[3], userId, "The function getIdentity returns " + userId);
+
+        return true
+
+      })
+      })
+
+  });
+
 
 });
