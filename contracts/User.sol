@@ -11,7 +11,6 @@ contract User is Owned {
 
     // Hash of attributes: needs to be hashed with symmetric keys - selectively public
     // - Visa type
-    // - Insured/Uninsured
     // - Birthday
     // - Passport expiration status
 
@@ -23,6 +22,7 @@ contract User is Owned {
         string ID;
         bool residency;
         bool military;
+        bool insurance;
     }
 
     mapping (address => Identity) public identities;
@@ -35,7 +35,8 @@ contract User is Owned {
             email: _email,
             ID: _ID,
             residency: false,
-            military: false
+            military: false,
+            insurance: false
         });
         identities[addr] = identity;
         return true;
@@ -64,6 +65,11 @@ contract User is Owned {
     function getMilitaryStatus(address addr) returns(bool){
         var person = identities[addr];
         return person.military;
+    }
+
+    function getInsurance(address addr) returns(bool){
+        var person = identities[addr];
+        return person.insurance;
     }
 
     function updateIdentity(address addr, string _username,  string _email, string _legalName, string _ID) returns(bool){
