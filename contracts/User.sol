@@ -20,6 +20,7 @@ contract User is Owned {
         string email;
         string legalName;
         string ID;
+        string visa;
         bool residency;
         bool military;
         bool insurance;
@@ -27,13 +28,14 @@ contract User is Owned {
 
     mapping (address => Identity) public identities;
 
-    function createIdentity(address addr, string _username,  string _email, string _legalName, string _ID) returns(bool){
+    function createIdentity(address addr, string _username,  string _email, string _legalName, string _ID, string _visa) returns(bool){
         Identity memory identity = Identity({
             creator: addr,
             username: _username,
             legalName: _legalName,
             email: _email,
             ID: _ID,
+            visa: _visa,
             residency: false,
             military: false,
             insurance: false
@@ -90,7 +92,7 @@ contract User is Owned {
     // The owner can change the owner address: timelocked feature
 
     // For a first time creation, a controller contract creates a proxy contract and holds
-    // reference to it; it can also change the ownership of that proxt to a different 
+    // reference to it; it can also change the ownership of that proxt to a different
     // controller
         // Does the controller create the contract of the invocation of the contract?
 
