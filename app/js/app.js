@@ -8,17 +8,9 @@ var account;
   function checkResidency(meesage) {
     var identity = User.deployed();
 
-    identity.getResidency.call(account, {from: account}).then(function(value){
-
-    })
-
-    identity.getVisa.call(account, {from: account}).then(function(value){
-
-    })
-
 /// We need a contract we'll call "Authority"
     var authority = Authorty.deployed();
-    authority.verify (
+    authority.isRecordVerified (
     //   we plugin the sender's address into the solidity contract to verify the info is available
     // WIP for this, but a simple data struct and a === to verify that data is the same.
     // })

@@ -9,12 +9,9 @@ contract Authority is Owned {
         Forwarded(destination, value, data);
     }
 
-    // Hash of attributes: needs to be hashed with symmetric keys - selectively public
-    // - Visa type
-    // - Birthday
-    // - Passport expiration status
+    address public controller;
 
-    VisaType[] public vistaTypes;
+    VisaType[] public visaTypes;
 
     struct VisaType {
         bytes32: tourist;
@@ -25,57 +22,36 @@ contract Authority is Owned {
         bytes32: longTermVisitMultiple;
     }
 
-
-    function createVisaType(address addr, string _username,  string _email, string _legalName, string _ID) returns(bool){
-        VisaType memory identity = VisaType({
-            creator: addr,
-            username: _username,
-            legalName: _legalName,
-            email: _email,
-            ID: _ID,
-            residency: false,
-            military: false,
-            insurance: false
-        });
-        visaTypes[addr] = identity;
-        return true;
+    struct RecordInfo {
+        uint recordType;
+        bytes32 recordHash;
+        uint timestamp;
+        string provider;
     }
 
-    function getAuthorityname(address addr) returns(string){
-        var person = visaTypes[addr];
-        return person.username;
+    modifier onlyController {
+        if (msg.sender != controller) throw;
+    _
     }
 
-    function getEmail(address addr) returns(string){
-        var person = visaTypes[addr];
-        return person.email;
+    function RecordVerifier(address registerController, uint256 defaultServicePrice, uint defaultValidityPeriod) {
+        if (registerController == 0) registerController = msg.sender;
+        controller = registerController;
+        if (defaultServicePrice == 0) defaultServicePrice = 10 finney; //0.01 ether
+        servicePrice = defaultServicePrice;
+        servicePriceCompanies = defaultServicePrice;
+        if (defaultValidityPeriod ==0) defaultValidityPeriod = 31536000; // 1 year
+        validityPeriod = defaultValidityPeriod;
     }
 
-    function getVisaType(address addr) returns(string, string, string, string){
-        var person = visaTypes[addr];
-        return (person.username, person.email, person.legalName, person.ID);
+    function isRecordVerified(address userAddress, uint recordType, bytes32 recordSha3Hash) constant returns (bool verified) {
+        RecordInfo[] recordInfoA = recordRegister[userAddress];
+        verified = false;
+        for (uint i = 0; i < recordInfoA.length; i++) {
+        RecordInfo recordInfo = recordInfoA[i];
+        verified = ((recordInfo.recordHash == recordSha3Hash) && (recordInfo.recordType == recordType) && (recordSha3Hash != 0));
+        if (verified) break;
+        }
     }
 
-    function getResidency(address addr) returns(bool){
-        var person = visaTypes[addr];
-        return person.residency;
-    }
-
-    function getMilitaryStatus(address addr) returns(bool){
-        var person = visaTypes[addr];
-        return person.military;
-    }
-
-    function getInsurance(address addr) returns(bool){
-        var person = visaTypes[addr];
-        return person.insurance;
-    }
-
-    function updateVisaType(address addr, string _username,  string _email, string _legalName, string _ID) returns(bool){
-        var person = visaTypes[addr];
-        person.username = _username;
-        person.email = _email;
-        person.legalName = _legalName;
-        person.ID = _ID;
-        return true;
     }
