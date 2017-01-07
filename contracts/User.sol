@@ -23,17 +23,19 @@ contract User is Owned {
         bool residency;
         bool military;
         bool insurance;
+        uint256 birthday;
     }
 
     mapping (address => Identity) public identities;
 
-    function createIdentity(address addr, string _username,  string _email, string _legalName, string _ID) returns(bool){
+    function createIdentity(address addr, string _username,  string _email, string _legalName, string _ID, uint256 _birthday) returns(bool){
         Identity memory identity = Identity({
             creator: addr,
             username: _username,
             legalName: _legalName,
             email: _email,
             ID: _ID,
+            birthday: _birthday,
             residency: false,
             military: false,
             insurance: false
@@ -52,9 +54,9 @@ contract User is Owned {
         return person.email;
     }
 
-    function getIdentity(address addr) returns(string, string, string, string){
+    function getIdentity(address addr) returns(string, string, string, string, uint256){
         var person = identities[addr];
-        return (person.username, person.email, person.legalName, person.ID);
+        return (person.username, person.email, person.legalName, person.ID, person.birthday);
     }
 
     function getResidency(address addr) returns(bool){
