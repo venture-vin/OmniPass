@@ -9,42 +9,59 @@ contract Authority is Owned {
         Forwarded(destination, value, data);
     }
 
+     /* The person or contract which can modify the register */
     address public controller;
 
-    VisaType[] public visaTypes;
+    Person[] private people;
 
-    struct VisaType {
-        bytes32: tourist;
-        bytes32: transit;
-        bytes32: service;
-        bytes32: longTermVisit;
-        bytes32: touristMultiple;
-        bytes32: longTermVisitMultiple;
+        struct Person {
+            string legalName;
+            uint ID;
+            string visa;
+            bool residency;
+            bool military;
+            bool insurance;
+        }
+
+    function addPerson ( string _legalName, uint _ID, string _visa) returns (bool success) {
+        Person memory newPerson;
+        newPerson.legalName = _legalName;
+        newPerson.ID = _ID;
+        newPerson.visa = _visa;
+        newPerson.residency = false;
+        newPerson.military = false;
+        newPerson.insurance = false;
+
+        people.push(newPerson);
+        return true;
     }
 
     struct RecordInfo {
-        uint recordType;
-        bytes32 recordHash;
+        string recordHash;
         uint timestamp;
-        string provider;
     }
+
+    mapping(address => RecordInfo[]) recordRegister;
+
+    function addRecordInfo ( string _recordHash) returns (bool success) {
+        RecordInfo memory newRecordInfo;
+        newRecord.recordhHash = _recordHash;
+        newPerson.timestamp = block.timestamp;
+    }
+
 
     modifier onlyController {
         if (msg.sender != controller) throw;
-    _
+    _;
     }
 
-    function RecordVerifier(address registerController, uint256 defaultServicePrice, uint defaultValidityPeriod) {
+    function RecordVerifier(address registerController, uint256 , uint) {
         if (registerController == 0) registerController = msg.sender;
         controller = registerController;
-        if (defaultServicePrice == 0) defaultServicePrice = 10 finney; //0.01 ether
-        servicePrice = defaultServicePrice;
-        servicePriceCompanies = defaultServicePrice;
-        if (defaultValidityPeriod ==0) defaultValidityPeriod = 31536000; // 1 year
-        validityPeriod = defaultValidityPeriod;
+
     }
 
-    function isRecordVerified(address userAddress, uint recordType, bytes32 recordSha3Hash) constant returns (bool verified) {
+    function verifyRecord(address userAddress, string recordSha3Hash) constant returns (bool verified) {
         RecordInfo[] recordInfoA = recordRegister[userAddress];
         verified = false;
         for (uint i = 0; i < recordInfoA.length; i++) {
@@ -54,4 +71,18 @@ contract Authority is Owned {
         }
     }
 
-    }
+}
+
+
+    //would like to implement a fixed array for visa types to be included in the person factory below
+
+    // VisaType[] public visaTypes;
+
+    // struct VisaType {
+    //     bytes32: tourist;
+    //     bytes32: transit;
+    //     bytes32: service;
+    //     bytes32: longTermVisit;
+    //     bytes32: touristMultiple;
+    //     bytes32: longTermVisitMultiple;
+    // }

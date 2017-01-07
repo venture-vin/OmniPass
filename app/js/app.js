@@ -5,12 +5,16 @@ var account;
 
 //pseudocode below
 
-  function checkResidency(meesage) {
-    var identity = User.deployed();
+  function verify() {
+    //take in authority contract's address and match it with person's legalname, id, date of birth
 
 /// We need a contract we'll call "Authority"
     var authority = Authorty.deployed();
-    authority.isRecordVerified (
+    var identity = User.deployed();
+
+    var datatoVerify = identity.getIdentity()
+    authority.addRecord()
+    authority.isRecordVerified(
     //   we plugin the sender's address into the solidity contract to verify the info is available
     // WIP for this, but a simple data struct and a === to verify that data is the same.
     // })
