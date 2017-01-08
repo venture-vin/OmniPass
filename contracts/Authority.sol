@@ -32,6 +32,7 @@ contract Authority is Owned {
             legalName: _legalName,
             ID: _ID,
             visa: _visa,
+            birthday: _birthday,
             residency: false,
             military: false,
             insurance: false
@@ -57,21 +58,21 @@ contract Authority is Owned {
         return (person.birthday);
     }
 
-    function verifyRecord(address addr, string _dataToVerify) constant returns (bool verified) {
+    // function verifyRecord(address addr, string _dataToVerify) constant returns (bool verified) {
 
-        Person[] personArray = people[addr];
-        var data = _dataToVerify;
-        var legalName = data.legalName;
-        var birthday = data.birthday;
+    //     Person[] personArray = people[addr];
+    //     var data = _dataToVerify;
+    //     var legalName = String(data[3].split('));
+    //     var birthday = String(data[4].split('));;
 
-        verified = false;
+    //     verified = false;
 
-        for (uint i = 0; i < personArray.length; i++) {
-            Person[] person = personArray[i];
-            verified = ((personArray[i].legalName == legalName) && (personArray[i].birthday == birthday) && (data != 0));
-            if (verified) break;
-        }
-    }
+    //     for (uint i = 0; i < personArray.length; i++) {
+    //         Person[] person = personArray[i];
+    //         verified = ((personArray[i].legalName == legalName) && (personArray[i].birthday == birthday) && (data != 0));
+    //         if (verified) break;
+    //     }
+    // }
 }
 
 
