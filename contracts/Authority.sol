@@ -68,8 +68,7 @@ contract Authority is Owned {
 
         for (uint i = 0; i < personArray.length; i++) {
             Person[] person = personArray[i];
-            RecordInfo recordInfo = recordInfoArray[i];
-            verified = ((recordInfoArray[i].legalName == recordSha3Hash) && (recordInfoArray[i].birthday == birthday) && (data != 0));
+            verified = ((personArray[i].legalName == legalName) && (personArray[i].birthday == birthday) && (data != 0));
             if (verified) break;
         }
     }
