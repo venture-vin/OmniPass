@@ -28,12 +28,12 @@ contract Controller is Owned {
     //     return true;
     // }
     function createIdentity(address addr, string name,  string _email) returns(address proxyAddress){
-        // Identity memory identity = Identity({creator: addr, username: name, email: _email });
-        // identities[addr] = identity;
-        proxy = new Proxy();
-        Proxy(proxy).createIdentity(addr, name, _email);
+        Identity memory identity = Identity({creator: addr, username: name, email: _email });
+        identities[addr] = identity;
+        // proxy = new Proxy();
+        // Proxy(proxy).createIdentity(addr, name, _email);
         // return address(new Proxy(addr, name, _email))
-        return proxy;
+        // return proxy;
     }
 
     function getUsername(address addr) returns(string){
