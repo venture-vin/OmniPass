@@ -8,7 +8,7 @@ contract('Authority', function(accounts) {
 
   });
 
-  it("adds person", function() {
+  it("adds person and verify getLegalName and getID functions", function() {
     var authority = Authority.deployed();
     var testFullName = 'Legal Name'
     var testId = '1234'
@@ -28,7 +28,7 @@ contract('Authority', function(accounts) {
       })
       .then((id) => {
 
-        assert.equal(id, testId, "The function getLegalName returns " + testId);
+        assert.equal(id, testId, "The function getID returns " + testId);
         return true
 
       })
@@ -44,6 +44,25 @@ contract('Authority', function(accounts) {
 
         assert.equal(!!data, true, "The addRecordInfo returns successfully with the address: " + data);
 
+        return true
+
+      })
+
+  });
+
+  it("gets a record info", function() {
+    var authority = Authority.deployed();
+    var testHash = 'skjhfkjaslkjfnakjnsdfaj981279anskjd'
+
+    return authority.addRecordInfo(accounts[1], testHash)
+      .then((data) => {
+
+        return authority.getRecordInfo.call(accounts[1])
+
+      })
+      .then((recordHash) => {
+
+        assert.equal(recordHash, testHash, "The function getRecordInfo returns " + testHash);
         return true
 
       })

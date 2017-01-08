@@ -55,6 +55,11 @@ contract Authority is Owned {
         recordRegister[addr] = newRecordInfo;
     }
 
+    function getRecordInfo(address addr) constant returns(string){
+        var record = recordRegister[addr];
+        return (record.recordHash);
+    }
+
     function getLegalName(address addr) constant returns(string){
         var person = people[addr];
         return (person.legalName);
