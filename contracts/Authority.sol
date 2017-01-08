@@ -62,6 +62,10 @@ contract Authority is Owned {
     }
 
     function verifyRecord(address userAddress, string recordSha3Hash) constant returns (bool verified) {
+
+        //pseudocode
+        //need to basically iterate over each structure and do a compare side by side of each hash, could possibly stringify the hash and the array and then compare variables, which will need to be in the same order in each data structure
+
         RecordInfo[] recordInfoA = recordRegister[userAddress];
         verified = false;
         for (uint i = 0; i < recordInfoA.length; i++) {
