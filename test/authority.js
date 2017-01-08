@@ -35,4 +35,19 @@ contract('Authority', function(accounts) {
 
   });
 
+  it("adds a record info", function() {
+    var authority = Authority.deployed();
+    var testHash = 'skjhfkjaslkjfnakjnsdfaj981279anskjd'
+
+    return authority.addRecordInfo(accounts[1], testHash)
+      .then((data) => {
+
+        assert.equal(!!data, true, "The addRecordInfo returns successfully with the address: " + data);
+
+        return true
+
+      })
+
+  });
+
 });

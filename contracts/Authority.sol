@@ -45,12 +45,14 @@ contract Authority is Owned {
         uint timestamp;
     }
 
-    mapping(address => RecordInfo[]) recordRegister;
+    mapping(address => RecordInfo) recordRegister;
 
-    function addRecordInfo ( string _recordHash) returns (bool success) {
-        RecordInfo memory newRecordInfo;
-        newRecordInfo.recordHash = _recordHash;
-        newRecordInfo.timestamp = block.timestamp;
+    function addRecordInfo (address addr, string _recordHash) returns (bool success) {
+        RecordInfo memory newRecordInfo = RecordInfo({
+            recordHash: _recordHash,
+            timestamp: block.timestamp
+        });
+        recordRegister[addr] = newRecordInfo;
     }
 
     function getLegalName(address addr) constant returns(string){
