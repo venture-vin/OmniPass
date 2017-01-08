@@ -19,9 +19,16 @@ contract('Authority', function(accounts) {
 
         return authority.getLegalName.call(accounts[1])
 
-      }).then((legalName) => {
+      })
+      .then((legalName) => {
 
         assert.equal(legalName, testFullName, "The function getLegalName returns " + testFullName);
+        return authority.getID.call(accounts[1])
+
+      })
+      .then((id) => {
+
+        assert.equal(id, testId, "The function getLegalName returns " + testId);
         return true
 
       })
