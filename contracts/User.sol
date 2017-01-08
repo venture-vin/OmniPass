@@ -34,8 +34,8 @@ contract User is Owned {
         Identity memory identity = Identity({
             creator: addr,
             username: _username,
-            legalName: _legalName,
             email: _email,
+            legalName: _legalName,
             ID: _ID,
             birthday: _birthday,
             visa: _visa,
