@@ -8,4 +8,24 @@ contract('Authority', function(accounts) {
 
   });
 
+  it("adds person", function() {
+    var authority = Authority.deployed();
+    var testFullName = 'Legal Name'
+    var testId = '1234'
+    var testVisa = 'tourist'
+
+    return authority.addPerson(accounts[1], testFullName, testId, testVisa)
+      .then((data) => {
+
+        return authority.getLegalName.call(accounts[1])
+
+      }).then((legalName) => {
+
+        assert.equal(legalName, testFullName, "The function getLegalName returns " + testFullName);
+        return true
+
+      })
+
+  });
+
 });
