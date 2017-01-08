@@ -47,32 +47,32 @@ contract User is Owned {
         return true;
     }
 
-    function getUsername(address addr) returns(string){
+    function getUsername(address addr) constant returns(string){
         var person = identities[addr];
         return person.username;
     }
 
-    function getEmail(address addr) returns(string){
+    function getEmail(address addr) constant returns(string){
         var person = identities[addr];
         return person.email;
     }
 
-    function getIdentity(address addr) returns(string, string, string, string, uint256){
+    function getIdentity(address addr) constant returns(string, string, string, string, uint256){
         var person = identities[addr];
         return (person.username, person.email, person.legalName, person.ID, person.birthday);
     }
 
-    function getResidency(address addr) returns(bool){
+    function getResidency(address addr) constant returns(bool){
         var person = identities[addr];
         return person.residency;
     }
 
-    function getMilitaryStatus(address addr) returns(bool){
+    function getMilitaryStatus(address addr) constant returns(bool){
         var person = identities[addr];
         return person.military;
     }
 
-    function getInsurance(address addr) returns(bool){
+    function getInsurance(address addr) constant returns(bool){
         var person = identities[addr];
         return person.insurance;
     }

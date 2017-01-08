@@ -8,14 +8,15 @@ contract Authority is Owned {
         if (!destination.call.value(value)(data)) {throw;}
         Forwarded(destination, value, data);
     }
-/* The person or contract which can modify the register */
-// address public controller;
+    /* The person or contract which can modify the register to be implmented later */
+    // address public controller;
 
-// Make a person hash to compare to the user identity
 
+    // Government created person's ID in the database
     struct Person {
         address creator;
         string legalName;
+        uint256 birthday;
         uint ID;
         string visa;
         bool residency;
@@ -25,40 +26,21 @@ contract Authority is Owned {
 
     mapping (address => Person) public people;
 
-    function addPerson(address addr, string _legalName, uint _ID, string _visa) returns (bool success) {
+    function addPerson(address addr, string _legalName, uint256 _birthday, uint _ID, string _visa) returns (bool success) {
         Person memory person = Person({
-        creator: addr,
-        legalName: _legalName,
-        ID: _ID,
-        visa: _visa,
-        residency: false,
-        military: false,
-        insurance: false
-    });
+            creator: addr,
+            legalName: _legalName,
+            ID: _ID,
+            visa: _visa,
+            residency: false,
+            military: false,
+            insurance: false
+            });
 
-    people[addr] = person;
-    return true;
+        people[addr] = person;
+        return true;
     }
 
-    struct RecordInfo {
-        string recordHash;
-        uint timestamp;
-    }
-
-    mapping(address => RecordInfo) recordRegister;
-
-    function addRecordInfo (address addr, string _recordHash) returns (bool success) {
-        RecordInfo memory newRecordInfo = RecordInfo({
-            recordHash: _recordHash,
-            timestamp: block.timestamp
-        });
-        recordRegister[addr] = newRecordInfo;
-    }
-
-    function getRecordInfo(address addr) constant returns(string){
-        var record = recordRegister[addr];
-        return (record.recordHash);
-    }
 
     function getLegalName(address addr) constant returns(string){
         var person = people[addr];
@@ -70,41 +52,35 @@ contract Authority is Owned {
         return (person.ID);
     }
 
+    function getBirthday(address addr) constant returns(uint256){
+        var person = people[addr];
+        return (person.birthday);
+    }
 
-    // modifier onlyController {
-    //     if (msg.sender != controller) throw;
-    // _;
-    // }
+    function verifyRecord(address addr, string _dataToVerify) constant returns (bool verified) {
 
-    // function RecordVerifier(address registerController, uint256 , uint) {
-    //     if (registerController == 0) registerController = msg.sender;
-    //     controller = registerController;
+        Person[] personArray = people[addr];
+        var data = _dataToVerify;
+        var legalName = data.legalName;
+        var birthday = data.birthday;
 
-    // }
+        verified = false;
 
-    // function verifyRecord(address userAddress, string recordSha3Hash) constant returns (bool verified) {
-
-    //     //pseudocode
-    //     //need to basically iterate over each structure and do a compare side by side of each hash, could possibly stringify the hash and the array and then compare variables, which will need to be in the same order in each data structure
-    //     //sha3(string1) == sha3(string);
-
-    //     RecordInfo[] recordInfoA = recordRegister[userAddress];
-    //     verified = false;
-    //     for (uint i = 0; i < recordInfoA.length; i++) {
-    //     RecordInfo recordInfo = recordInfoA[i];
-    //     verified = ((recordInfo.recordHash == recordSha3Hash) && (recordInfo.recordType == recordType) && (recordSha3Hash != 0));
-    //     if (verified) break;
-    //     }
-    // }
-
+        for (uint i = 0; i < personArray.length; i++) {
+            Person[] person = personArray[i];
+            RecordInfo recordInfo = recordInfoArray[i];
+            verified = ((recordInfoArray[i].legalName == recordSha3Hash) && (recordInfoArray[i].birthday == birthday) && (data != 0));
+            if (verified) break;
+        }
+    }
 }
 
 
-    //would like to implement a fixed array for visa types to be included in the person factory below
+//would like to implement a fixed array for visa types to be included in the person factory
 
-    // VisaType[] public visaTypes;
+// VisaType[] public visaTypes;
 
-    // struct VisaType {
+// struct VisaType {
     //     bytes32: tourist;
     //     bytes32: transit;
     //     bytes32: service;
