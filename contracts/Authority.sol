@@ -1,5 +1,7 @@
 pragma solidity ^0.4.2;
 
+//This should be a separate dAPP in order for the verification to work properly.
+
 import "Owned.sol";
 
 contract Authority is Owned {
