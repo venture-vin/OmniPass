@@ -20,6 +20,7 @@ contract User is Owned {
         string email;
         string legalName;
         string ID;
+        string visa;
         bool residency;
         bool military;
         bool insurance;
@@ -28,14 +29,16 @@ contract User is Owned {
 
     mapping (address => Identity) public identities;
 
-    function createIdentity(address addr, string _username,  string _email, string _legalName, string _ID, uint256 _birthday) returns(bool){
+
+    function createIdentity(address addr, string _username,  string _email, string _legalName, string _ID, uint256 _birthday, string _visa) returns(bool){
         Identity memory identity = Identity({
             creator: addr,
             username: _username,
-            legalName: _legalName,
             email: _email,
+            legalName: _legalName,
             ID: _ID,
             birthday: _birthday,
+            visa: _visa,
             residency: false,
             military: false,
             insurance: false
@@ -44,32 +47,32 @@ contract User is Owned {
         return true;
     }
 
-    function getUsername(address addr) returns(string){
+    function getUsername(address addr) constant returns(string){
         var person = identities[addr];
         return person.username;
     }
 
-    function getEmail(address addr) returns(string){
+    function getEmail(address addr) constant returns(string){
         var person = identities[addr];
         return person.email;
     }
 
-    function getIdentity(address addr) returns(string, string, string, string, uint256){
+    function getIdentity(address addr) constant returns(string, string, string, string, uint256){
         var person = identities[addr];
         return (person.username, person.email, person.legalName, person.ID, person.birthday);
     }
 
-    function getResidency(address addr) returns(bool){
+    function getResidency(address addr) constant returns(bool){
         var person = identities[addr];
         return person.residency;
     }
 
-    function getMilitaryStatus(address addr) returns(bool){
+    function getMilitaryStatus(address addr) constant returns(bool){
         var person = identities[addr];
         return person.military;
     }
 
-    function getInsurance(address addr) returns(bool){
+    function getInsurance(address addr) constant returns(bool){
         var person = identities[addr];
         return person.insurance;
     }
@@ -92,7 +95,7 @@ contract User is Owned {
     // The owner can change the owner address: timelocked feature
 
     // For a first time creation, a controller contract creates a proxy contract and holds
-    // reference to it; it can also change the ownership of that proxt to a different 
+    // reference to it; it can also change the ownership of that proxt to a different
     // controller
         // Does the controller create the contract of the invocation of the contract?
 
