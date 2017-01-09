@@ -1252,3 +1252,45 @@ p.copyright {
 	}
 
 }
+
+iframe {
+	margin-top: 20%;
+}
+
+.down {
+	margin-top: 17%;
+}
+
+.headshot {
+	height: 80%;
+	width: 80%;
+	border-radius: 50%;
+}
+
+.purply {
+	color: #5C3A5E !important;
+}
+.purply-bg {
+	background-color: #5C3A5E !important;
+}
+
+.orangy {
+	color: #E98738 !important;
+}
+.orangy-bg {
+	background-color: #E98738 !important;
+}
+
+.bluey {
+	color: #0A5284 !important;
+}
+.bluey-bg {
+	background-color: #0A5284 !important;
+}
+
+.grayy {
+	color: #2F2F31 !important;
+}
+.grayy-bg {
+	background-color: #2F2F31 !important;
+}
