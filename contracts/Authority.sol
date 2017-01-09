@@ -17,7 +17,7 @@ contract Authority is Owned {
         address creator;
         string legalName;
         uint256 birthday;
-        uint ID;
+        string ID;
         string visa;
         bool residency;
         bool military;
@@ -26,7 +26,7 @@ contract Authority is Owned {
 
     mapping (address => Person) public people;
 
-    function addPerson(address addr, string _legalName, uint256 _birthday, uint _ID, string _visa) returns (bool success) {
+    function addPerson(address addr, string _legalName, uint256 _birthday, string _ID, string _visa) returns (bool success) {
         Person memory person = Person({
             creator: addr,
             legalName: _legalName,
@@ -48,7 +48,7 @@ contract Authority is Owned {
         return (person.legalName);
     }
 
-    function getID(address addr) constant returns(uint){
+    function getID(address addr) constant returns(string){
         var person = people[addr];
         return (person.ID);
     }
