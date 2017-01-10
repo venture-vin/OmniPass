@@ -46,8 +46,6 @@ Our app is deployed with truffle framework, on the testprc network, as it’s st
 - HTML
 - [Solidity](https://github.com/ethereum/wiki/wiki/The-Solidity-Programming-Language)
 
-Link to Back End Server Repo: https://github.com/sinwav/kairos-go
-
 #### <a name="future"></a> Future
 
 We are also looking into using Microsoft’s Machine Learning Services to make the Data smarter. For example, in the field of Health Care - we could anticipate which neighborhoods are prone to certain illnesses.
