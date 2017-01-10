@@ -1,5 +1,4 @@
 # OmniPass
-<<<<<<< HEAD
 ![OmniPass Logo](/app/img/omnipass_logo.png "Logo OmniPass")
 
 # Table of Contents
