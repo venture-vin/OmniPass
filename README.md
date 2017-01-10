@@ -20,11 +20,10 @@ Identity is broken. Billions lack it. Yet every transaction, whether it be Basic
 * [Umar Bajwa](https://github.com/UmarFBajwa)
 * [Nicole Hughes](#)
 
-#### <a name="project-demo"></a> Live Project Demo
+#### <a name="project-demo"></a> Project Demo
 
-[Short Youtube Demo](https://www.youtube.com/watch?v=KEHgwaxvJ68&feature=youtu.be)
-&
-[Round 2 Pitch](https://www.youtube.com/watch?v=GldEsuR3LEU&feature=youtu.be)
+[Short Youtube Demo](https://www.youtube.com/watch?v=47Z3bInwVe0&feature=youtu.be)
+
 
 #### <a name="description"></a> Description
 The idea behind our dAPP is to have a user be able to verify their identity with any sort of government authority.
