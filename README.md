@@ -18,7 +18,7 @@ Identity is broken. Billions lack it. Yet every transaction, whether it be Basic
 * [Olya Royall](https://github.com/venture-vin)
 * [Nick Russo](https://github.com/sinwav)
 * [Umar Bajwa](https://github.com/UmarFBajwa)
-* [Nicole ](https://github.com/UmarFBajwa)
+* [Nicole Hughes](#)
 
 #### <a name="project-demo"></a> Live Project Demo
 
