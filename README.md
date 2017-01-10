@@ -1,5 +1,5 @@
 # OmniPass
-![OmniPass Logo](/img/omnipass_logo "Logo OmniPass")
+![OmniPass Logo](../app/img/omnipass_logo "Logo OmniPass")
 
 # Table of Contents
 * [Why](#why)
